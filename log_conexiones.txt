@@ -1,0 +1,12 @@
+Intentando conectar por SSH...
+Conexión SSH establecida.
+Nueva contraseña generada: jz9xJj^jIiDx
+screen-length 0 temporary
+Info: The configuration takes effect on the current user terminal interface only.
+<BOLIVAR-R136>system-view
+Enter system view, return user view with Ctrl+Z.
+[BOLIVAR-R136]local-user admin password irreversible-cipher
+              ^
+Error: Unrecognized command found at '^' position.
+[BOLIVAR-R136]
+Contraseña generada: jz9xJj^jIiDx

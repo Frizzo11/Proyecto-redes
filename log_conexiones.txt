@@ -1,12 +1,19 @@
-Intentando conectar por SSH...
+Procesando IP: 10.80.255.14
+Intentando conectar por SSH a 10.80.255.14...
+Error en conexión SSH a 10.80.255.14: Authentication failed.
+Intentando conectar por Telnet a 10.80.255.14...
+Error en conexión Telnet a 10.80.255.14: [WinError 10061] No se puede establecer una conexión ya que el equipo de destino denegó expresamente dicha conexión
+No se pudo generar una contraseña para 10.80.255.14.
+Procesando IP: 10.80.255.15
+Intentando conectar por SSH a 10.80.255.15...
 Conexión SSH establecida.
-Nueva contraseña generada: aPLeace$^8!#
+Nueva contraseña generada: N9gcQUF%fB9*
 screen-length 0 temporary
 Info: The configuration takes effect on the current user terminal interface only.
 <BOLIVAR-R137>system-view
 Enter system view, return user view with Ctrl+Z.
 [BOLIVAR-R137]aaa
-[BOLIVAR-R137-aaa]local-user admin password irreversible-cipher aPLeace$^8!#
+[BOLIVAR-R137-aaa]local-user admin password irreversible-cipher N9gcQUF%fB9*
 Please enter old password:
-Enviado: ftOKa@I3iivi
-Contraseña generada: aPLeace$^8!#
+Enviado: aPLeace$^8!#
+Contraseña generada para 10.80.255.15: N9gcQUF%fB9*

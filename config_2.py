@@ -8,7 +8,7 @@ import string
 ssh_host = "10.80.255.15"
 ssh_port = 22
 ssh_username = "admin"
-ssh_password = "ftOKa@I3iivi"
+ssh_password = "ftOKa@I3iivi" # Contraseña actual
 
 telnet_host = "10.80.255.15"
 telnet_port = 23

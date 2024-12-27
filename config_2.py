@@ -5,15 +5,15 @@ import random
 import string
 
 # Configuración de conexión
-ssh_host = "10.80.255.14"
+ssh_host = "10.80.255.15"
 ssh_port = 22
 ssh_username = "admin"
-ssh_password = "mrsi94zqtd@"
+ssh_password = "ftOKa@I3iivi"
 
-telnet_host = "10.80.255.14"
+telnet_host = "10.80.255.15"
 telnet_port = 23
 telnet_username = "admin"
-telnet_password = "mrsi94zqtd@"
+telnet_password = "ftOKa@I3iivi"
 
 # Comando global
 command = "display current-configuration"
@@ -26,15 +26,17 @@ def generar_contraseña(longitud=12):
 # Log de operaciones
 log = []
 
-def esperar_y_enviar(channel, prompts, response, delay=1):
+
+def esperar_y_enviar(channel, prompts, response, delay=1, timeout=30):
     """
     Espera dinámicamente ciertos prompts y responde.
     """
     output = ""
+    start_time = time.time()
     while True:
         if channel.recv_ready():
             time.sleep(delay)
-            chunk = channel.recv(1024).decode()
+            chunk = channel.recv(1024).decode(errors='ignore')
             output += chunk
             log.append(chunk)
             for prompt in prompts:
@@ -44,7 +46,10 @@ def esperar_y_enviar(channel, prompts, response, delay=1):
                     log.append(f"Enviado: {response}")
                     return output
         else:
-            break
+            if time.time() - start_time > timeout:
+                log.append("Timeout esperando respuesta.")
+                break
+            time.sleep(1)
     return output
 
 def conectar_ssh():
@@ -73,12 +78,13 @@ def conectar_ssh():
         # Generar y configurar nueva contraseña
         nueva_contraseña = generar_contraseña()
         with open("contraseñanueva.txt", "w") as file:
-            file.write(nueva_contraseña)
+            file.write(f"Contraseña: {nueva_contraseña}\n")
+            file.write(f"IP: {ssh_host}\n")
         log.append(f"Nueva contraseña generada: {nueva_contraseña}")
 
         prompts = ["Re-enter password:", "Are you sure? [Y/N]:", "Please enter old password:"]
         channel.send("aaa\n")
-        channel.send("local-user admin password irreversible-cipher {nueva_contraseña}\n")
+        channel.send(f"local-user admin password irreversible-cipher {nueva_contraseña}\n")
         esperar_y_enviar(channel, prompts, ssh_password) #parece q solo pide old password
 
         # Finalizar configuración

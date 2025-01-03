@@ -1,40 +1,24 @@
 # Proyecto-redes
-### Comandos:
-
-HABILITAR MODO CON PRIVILEGIOS HUAWEI PARA CONFIGURAR:
-system-view
-
-CAMBIAR CONTRASEÑA ADMIN HUAWEI:
-local-user admin password irreversible-cipher CONTRASEÑA (esto va despues del aaa, osea q seria system-view y despues aaa)
-
-CONFIG PARA HABILITAR SSH:
-
-local-user admin service-type ssh (habilita usuario admin para ingreso por ssh)
-stelnet server enable (habilita server ssh)
-ssh user admin (crea usuario admin para ssh)
-ssh user admin authentication-type password (método de autenticación por contraseña)
-ssh user admin service-type all
-
-user-interface vty 0 4
-authentication-mode aaa
-user privilege level 15
-protocol inbound all
-
-ANULAR SERVER TELNET
-
-undo telnet server enable
-
-CAMBIAR CLAVE DE ACCESO AL SWITCH LOCAL POR CABLE CONSOLA:
-
-user-interface con 0
-authentication-mode password
-set authentication password cipher CLAVE
-
-Comandos para probar
-
-display current-configuration #Es una especio de ifconfig
-
-### Credenciales:
-
-usuario: admin
-contraseña: hospitales.axzs*7 (si no funciona esa probar con, q suele ser la q funciona en los swtiches de bolivar mrsi94zqtd@)
+## Funcionamiento
+### Antes de ejecutar
+- Editar ips.txt con las ips a recorrer
+- Si es necesario cambiar la contraseña o el usuario con el cual se entra cambiar: ssh_username, ssh_password, telnet_username, telnet_password
+- Tener la última version de python y las siguientes librerias instaladas:
+  - import paramiko
+  - import telnetlib (no esta en el nativo de python, hay que instalarlo usando el comando en el notion)
+  - import time
+  - import random
+  - import string
+### Mientras se ejecuta
+No cambiar los txt y esperar que se termine de ejecutar para revisarlos, suele tardar un rato en terminar y es normal que tarde bastante si hay muchas ips en la lista
+## Archivos
+### config_con_recorrido.py
+Es el archivo que hace el recorrido principal y el que se tiene que ejecutar
+### contraseñanueva.txt
+Al terminar de correr el script guarda las contraseñas nuevas y en que IP fueron cambiadas
+### ips.txt
+Listado de las IP a recorrer, debe ser editado antes de correr el script
+### log_conexiones.txt
+Al terminar de correr el script guarda en este txt todos lo que esta en pantalla
+### config_2.py
+Ignorar, archivo con version vieja del script

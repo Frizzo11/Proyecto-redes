@@ -2,10 +2,10 @@
 ## Funcionamiento
 ### Antes de ejecutar
 - Editar ips.txt con las ips a recorrer
-- Si es necesario cambiar la contraseña o el usuario con el cual se entra cambiar: ssh_username, ssh_password, telnet_username, telnet_password
-- Tener la última version de python y las siguientes librerias instaladas:
+- Si es necesario cambiar las credenciales para acceder inicialmente editar los siguientes campos (dejar los dos "username" iguales, lo mismo con los dos "password"): ssh_username, ssh_password, telnet_username, telnet_password
+- Tener en la terminal donde se ejecuta el script la última version de python y las siguientes librerias instaladas:
   - import paramiko
-  - import telnetlib (no esta en el nativo de python, hay que instalarlo usando el comando en el notion)
+  - import telnetlib (pip install telnetlib-313-and-up pq no esta disponible de forma nativa en python)
   - import time
   - import random
   - import string

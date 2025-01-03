@@ -1,5 +1,6 @@
+#ver configuraciones de ssh por telnet
 import paramiko
-import telnetlib
+import telnetlib #no esta en el nativo de python, hay que instalarlo usando el comando en el notion
 import time
 import random
 import string
@@ -8,15 +9,12 @@ import string
 ssh_host = "10.80.255.15"
 ssh_port = 22
 ssh_username = "admin"
-ssh_password = "aPLeace$^8!#" # Contraseña actual
+ssh_password = "BmU&qff$6&Zl" # Contraseña actual
 
 telnet_host = "10.80.255.15"
 telnet_port = 23
 telnet_username = "admin"
-telnet_password = "aPLeace$^8!#" #N9gcQUF%fB9* es la nueva contraseña de 10.80.255.15
-
-# Comando global
-command = "display current-configuration"
+telnet_password = "BmU&qff$6&Zl"
 
 # Generar contraseña aleatoria
 def generar_contraseña(longitud=12):
@@ -63,19 +61,19 @@ def conectar_ssh(ip):
         output = channel.recv(65535).decode()
         log.append("Conexión SSH establecida.")
 
-        # Cartel de contraseña débil
+        # cartel de contraseña débil
         if "Change now? [Y/N]:" in output:
             channel.send("N\n")
             time.sleep(1)
             log.append("Cambio de contraseña rechazado.")
 
-        # Configuración básica
+        # modo privilegiado
         channel.send("screen-length 0 temporary\n")
         time.sleep(1)
         channel.send("system-view\n")
         time.sleep(1)
 
-        # Generar y configurar nueva contraseña
+        # genero y cambio contraseña
         nueva_contraseña = generar_contraseña()
         with open("contraseñanueva.txt", "w") as file:
             file.write(f"Contraseña: {nueva_contraseña}\n")
@@ -112,7 +110,7 @@ def conectar_telnet(ip):
         # Configurar SSH
         tn.write(b"system-view\n")
         time.sleep(1)
-        tn.write(b"stelnet server enable\n")
+        tn.write(b"stelnet server enable\n") #verificar si es stelnet o ssh server enable
         time.sleep(1)
         tn.write(b"quit\n")
         time.sleep(1)
@@ -124,12 +122,12 @@ def conectar_telnet(ip):
         log.append(f"Error en conexión Telnet a {ip}: {e}")
         return False
 
-# Leer IPs desde un archivo externo
+# lee ips desde el archivo ips.txt
 def leer_ips(archivo):
     with open("ips.txt", "r") as file:
         return [line.strip() for line in file.readlines()]
 
-# Flujo principal
+# loop principal
 ips = leer_ips("ips.txt")
 for ip in ips:
     log.append(f"Procesando IP: {ip}")
